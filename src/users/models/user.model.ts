@@ -20,7 +20,4 @@ export class User extends Model {
   @AllowNull
   @Column
   address: string;
-
-  @CreatedAt
-  createdAt: Date;
 }
