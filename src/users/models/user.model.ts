@@ -1,13 +1,26 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { AllowNull, Column, CreatedAt, Model, Table, Unique } from 'sequelize-typescript';
 
 @Table
 export class User extends Model {
+  @Unique
   @Column
-  firstName: string;
+  username: string;
+
+  @AllowNull
+  @Column
+  email: string;
 
   @Column
-  lastName: string;
+  password: string;
 
-  @Column({ defaultValue: true })
-  isActive: boolean;
+  @AllowNull
+  @Column
+  phone: string;
+
+  @AllowNull
+  @Column
+  address: string;
+
+  @CreatedAt
+  createdAt: Date;
 }
