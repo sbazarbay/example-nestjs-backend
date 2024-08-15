@@ -19,35 +19,50 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @UseGuards(JWTGuard)
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    console.log();
+    const user = await this.usersService.create(createUserDto);
+    console.log(`1 item created, id: ${user.id}`);
+
+    return user;
   }
 
   @Get()
   @UseGuards(JWTGuard)
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    const users = await this.usersService.findAll();
+    console.log(`${users.length} item(s) found`);
+
+    return users;
   }
 
   @Get(':id')
   @UseGuards(JWTGuard)
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const user = await this.usersService.findOne(id);
+    console.log(`Item found, id: ${user.id}`);
+
+    return user;
   }
 
   @Patch(':id')
   @UseGuards(JWTGuard)
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.usersService.update(id, updateUserDto);
+    const result = await this.usersService.update(id, updateUserDto);
+    console.log(`Item changed, id: ${id}`);
+
+    return { itemsUpdated: result[0] };
   }
 
   @Delete(':id')
   @UseGuards(JWTGuard)
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    await this.usersService.remove(id);
+    console.log(`Item deleted, id: ${id}`);
+
+    return { itemsDeleted: 1 };
   }
 }

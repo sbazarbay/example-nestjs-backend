@@ -7,7 +7,7 @@ export class JWTGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    console.log("Checking JWT token...");
+    console.log("\nChecking JWT token...");
     return super.canActivate(context);
   }
 }
