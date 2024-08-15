@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/models/user.model';
 import { AuthModule } from './auth/auth.module';
 
+// TODO: use env variables to store sensitive data
 @Module({
   imports: [
     SequelizeModule.forRoot({

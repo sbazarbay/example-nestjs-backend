@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JWTGuard } from 'src/auth/guards/jwt.guard';
 
+// TODO: can use nest.js built-in error classes for error handling (+ can export this to a separate layer by implementing custom exception filter, to avoid duplicate code in each method)
 @Controller('api/v1/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -21,6 +22,7 @@ export class UsersController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     console.log();
+    // TODO: encrypt incoming passwords before saving to DB
     const user = await this.usersService.create(createUserDto);
     console.log(`1 item created, id: ${user.id}`);
 
@@ -30,6 +32,7 @@ export class UsersController {
   @Get()
   @UseGuards(JWTGuard)
   async findAll() {
+    // TODO: can implement pagination here too
     const users = await this.usersService.findAll();
     console.log(`${users.length} item(s) found`);
 

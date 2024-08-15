@@ -3,6 +3,7 @@ import { AuthDto } from './dto/auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 
+// TODO: can also implement refresh tokens + HttpOnly calls to check
 @Injectable()
 export class AuthService {
   constructor(
