@@ -11,8 +11,8 @@ export class UsersService {
     private userModel: typeof User,
   ) {}
 
-  create(createUserDto: CreateUserDto): Promise<User> {
-    return User.create({
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    return await User.create({
       username: createUserDto.username,
       email: createUserDto.email,
       password: createUserDto.password,
@@ -22,19 +22,19 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+    return await this.userModel.findAll();
   }
 
-  findOne(id: number): Promise<User> {
-    return this.userModel.findOne({
-      where: {
-        id,
-      },
-    });
+  async findOne(id: number): Promise<User> {
+    return await this.userModel.findOne({ where: { id } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return User.update(
+  async findOneByUsernameAndPassword(username: string, password: string): Promise<User> {
+    return await this.userModel.findOne({ where: { username, password } });
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await User.update(
       {
         username: updateUserDto.username,
         email: updateUserDto.email,
