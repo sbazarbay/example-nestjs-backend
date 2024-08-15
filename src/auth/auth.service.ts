@@ -7,7 +7,7 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
 
   validateUser(authDto: AuthDto) {
-    // find user in db by authDto.username
+    // TODO: find user in db by authDto.username
     return this.jwtService.sign({ id: 0, username: 'example' });
   }
 }
